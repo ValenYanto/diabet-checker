@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+
+    <title>Diagnosis Diabetes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='assets/css/templatemo-edu-meeting.css') }}" rel="stylesheet">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="{{ url_for('static', filename='assets/images/logo.png') }}" alt="Diagnosis Diabetes Logo" width="80" height="80">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                        <li><a href="/service">Service</a></li>
+                    </ul>
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<section class="section main-banner" id="top" data-section="section1">
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='assets/images/diabet-check.mp4') }}" type="video/mp4">
+    </video>
+
+    <div class="video-overlay header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="caption">
+                        <h2>Selamat Datang Di <br/> Diagnosis Diabetes</h2>
+                        <p>
+                            Diabetes merupakan penyakit kronis yang menyebabkan kematian terbanyak di dunia. Penyakit ini dapat
+                            menyebabkan komplikasi jangka panjang yang berkembang secara bertahap, seperti serangan jantung,
+                            stroke, dan masalah pada ginjal, mata, kulit, dan pembuluh darah. Oleh karena itu, diagnosa dini
+                            diabetes sangat penting bagi pasien untuk mengetahui status diabetesnya!
+                        </p>
+                        <div class="main-button-green">
+                            <div class="scroll-to-section">
+                                <a href="/service">Cek Diabetesmu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Main Banner Area End ***** -->
+
+<!-- Scripts -->
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+</html>

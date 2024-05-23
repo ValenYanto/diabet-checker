@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diagnosis Diabetes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <main class="container">
+      <form class="my-5">
+        <div class="mb-3">
+          <label for="JumlahKehamilan" class="form-label"
+            >Jumlah Kehamilan</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="JumlahKehamilan"
+            aria-describedby="JumlahKehamilan"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="KadarGula" class="form-label">Kadar Gula</label>
+          <input
+            type="number"
+            class="form-control"
+            id="KadarGula"
+            aria-describedby="KadarGula"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="TekananDarah" class="form-label">Tekanan Darah</label>
+          <input
+            type="number"
+            class="form-control"
+            id="TekananDarah"
+            aria-describedby="TekananDarah"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="KetebalanLipatanKulit" class="form-label"
+            >Ketebalan Lipatan Kulit</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="KetebalanLipatanKulit"
+            aria-describedby="KetebalanLipatanKulit"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="JumlahInsulin" class="form-label">Jumlah Insulin</label>
+          <input
+            type="number"
+            class="form-control"
+            id="JumlahInsulin"
+            aria-describedby="JumlahInsulin"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="BeratBadan" class="form-label">Berat Badan</label>
+          <input
+            type="number"
+            class="form-control"
+            id="BeratBadan"
+            aria-describedby="BeratBadan"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="RiawayatDiabetes" class="form-label"
+            >Riwayat Diabetes</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="RiwayatDiabetes"
+            aria-describedby="RiwayatDiabetes"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Umur" class="form-label">Umur</label>
+          <input
+            type="number"
+            class="form-control"
+            id="Umur"
+            aria-describedby="Umur"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          onclick="submitData(event)"
+        >
+          Submit
+        </button>
+      </form>
+    </main>
+
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function submitData(event) {
+        event.preventDefault(); // Mencegah pengiriman formulir default
+
+        // Mengambil nilai dari setiap input di formulir
+        var formData = {
+          JumlahKehamilan: document.getElementById("JumlahKehamilan").value,
+          KadarGula: document.getElementById("KadarGula").value,
+          TekananDarah: document.getElementById("TekananDarah").value,
+          KetebalanLipatanKulit: document.getElementById(
+            "KetebalanLipatanKulit"
+          ).value,
+          JumlahInsulin: document.getElementById("JumlahInsulin").value,
+          BeratBadan: document.getElementById("BeratBadan").value,
+          RiwayatDiabetes: document.getElementById("RiwayatDiabetes").value,
+          Umur: document.getElementById("Umur").value,
+          // Mengambil nilai input lainnya di sini
+        };
+
+        // Mengirim data sebagai payload dalam permintaan POST menggunakan fetch API
+        fetch("/predict", {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle respon dari server di sini
+            if (data.prediction == "diabetes") {
+              Swal.fire({
+                icon: "error",
+                title: "Maaf",
+                text: "Kamu Di Nyatakan Terkena Diabetes",
+              });
+            } else {
+              Swal.fire({
+                icon: "success",
+                title: "Selamat",
+                text: "Kamu Di Nyatakan Tidak Terkena Diabetes",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
