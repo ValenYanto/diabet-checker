@@ -11,10 +11,72 @@
       crossorigin="anonymous"
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom styles for this template -->
+    <link
+      href="{{ url_for('static', filename='assets/css/templatemo-edu-meeting.css') }}"
+      rel="stylesheet"
+    />
+
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        background-color: #a5e4dc;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="/" class="logo">
+                <img
+                  src="{{ url_for('static', filename='assets/images/logo.png') }}"
+                  alt="Diagnosis Diabetes Logo"
+                  width="80"
+                  height="80"
+                />
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="#top">Home</a></li>
+                <li><a href="/service" class="active">Service</a></li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <main
+      class="container justify-content-center text-center"
+      style="margin-top: 7rem !important"
+    >
+      <h1 class="caption" style="color: #2d326d; font-weight: bold">
+        Masukan Datamu
+      </h1>
+    </main>
+
     <main class="container">
-      <form class="my-5">
+      <form>
         <div class="mb-3">
           <label for="JumlahKehamilan" class="form-label"
             >Jumlah Kehamilan</label
@@ -128,6 +190,16 @@
           // Mengambil nilai input lainnya di sini
         };
 
+        // Menampilkan loading pop-up
+        Swal.fire({
+          title: 'Mohon Menunggu..',
+          text: 'Sistem Sedang Memroses Data Yang Diberikan',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          }
+        });
+
         // Mengirim data sebagai payload dalam permintaan POST menggunakan fetch API
         fetch("/predict", {
           method: "POST",
@@ -138,23 +210,20 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            // Handle respon dari server di sini
+            // Mengarahkan pengguna berdasarkan hasil prediksi
             if (data.prediction == "diabetes") {
-              Swal.fire({
-                icon: "error",
-                title: "Maaf",
-                text: "Kamu Di Nyatakan Terkena Diabetes",
-              });
+              window.location.href = "/diabetes";
             } else {
-              Swal.fire({
-                icon: "success",
-                title: "Selamat",
-                text: "Kamu Di Nyatakan Tidak Terkena Diabetes",
-              });
+              window.location.href = "/nondiabetes";
             }
           })
           .catch((error) => {
             console.error("Error:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Terjadi kesalahan. Silakan coba lagi.",
+            });
           });
       }
     </script>

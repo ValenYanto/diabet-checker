@@ -136,6 +136,14 @@ def home():
 def service():
     return render_template('service.html')
 
+@app.route('/diabetes')
+def diabetes():
+    return render_template('diabetes.html')
+
+@app.route('/nondiabetes')
+def nondiabetes():
+    return render_template('non-diabetes.html')
+
 @app.route('/predict', methods=['POST'])
 async def predict():
     data = request.get_json()

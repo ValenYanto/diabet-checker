@@ -272,6 +272,7 @@ header
 }
 
 .header-area {
+  background-color: rgba(53, 18, 18, 0.15);
   position: absolute;
   top: 0px;
   left: 0;
